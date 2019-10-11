@@ -25,7 +25,7 @@ pipeline{
                 //bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
                 script {
 
-                    def item = build.getItem("orsys code dev master")
+                    def item = currentBuild.getItem("orsys code dev master")
                     /*def  f=item.getLastFailedBuild()
 
                     println f.getTime()*/
