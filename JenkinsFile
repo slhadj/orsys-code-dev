@@ -22,6 +22,8 @@ pipeline{
             steps{
                 echo "========Specification testing========"
                 //bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
+                def lastSuccess = currentBuild.getProject().getLastSuccessfulBuild().getNumber() ;
+                echo lastSuccess.id
             }
             post{
                 always{
