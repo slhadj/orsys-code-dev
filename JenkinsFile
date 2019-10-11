@@ -24,17 +24,10 @@ pipeline{
                 echo "========Specification testing========"
                 //bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
                 script {
-
-                    def item = call(currentBuild.getItem("orsys code dev master"))
-                    /*def  f=item.getLastFailedBuild()
-
-                    println f.getTime()*/
-
-
-
-                    def  ff=item.getLastSuccessfulBuild()
-                    println ff.getTime().format("YYYY-MMM-dd HH:mm:ss")
-                    println ff.getTime().format("dd-MM-yyyy")
+                    call(){
+                    def lastSuccess = currentBuild.getProject().getLastSuccessfulBuild().getNumber() ;
+                    echo lastSuccess;
+                    }
 
                 }
 
