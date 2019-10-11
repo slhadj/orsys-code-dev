@@ -24,20 +24,33 @@ pipeline{
                 echo "========Specification testing========"
                 //bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
                 script {
-                    println "currentBuild.getProject() = ${currentBuild.getProject()}"
+                    println "ok"
                    // def lastSuccess = currentBuild.getProject().getLastSuccessfulBuild().getNumber() ;
                    // echo lastSuccess;
                    
                     /*This script shows how to get basic information about a job and its builds*/
-          /*         def jenkins = Jenkins.getInstance()
-                    //println "Last successfull build: ${jenkins}"
-                    def jobName = "orsys code dev master"
-                    def job = jenkins.getItem(jobName)
-
-                    println "Last successfull build: ${job.getLastSuccessfulBuild()}"
-                     println "Last failed build: ${job.getLastFailedBuild()}"
-                    println "Last build: ${job.getLastBuild()}"
-                    println "All builds: ${job.getBuilds().collect{ it.getNumber()}}" */
+                    import jenkins.model.Jenkins
+                    name = "test_master_builder_project"
+                    //If we want to add more then one job
+                    def items = new LinkedHashSet();
+                    def job = Hudson.instance.getJob(name)
+                    items.add(job);
+                    items.each { item ->
+                        try {
+                            def job_data = Jenkins.instance.getItemByFullName(item.fullName)
+                            println 'Job: ' + item.fullName
+                            if (job_data.getLastBuild()) {
+                                last_job_num = job_data.getLastBuild().getNumber()
+                                def upStreamBuild = Jenkins.getInstance().getItemByFullName(item.fullName).getBuildByNumber(last_job_num)
+                    println 'LastBuildNumer: ' + last_job_num
+                                println "LastBuildTime: ${upStreamBuild.getTime()}"
+                            } else {
+                                println 'LastBuildNumer: Null'
+                            }
+                        } catch (Exception e) {
+                            println ' Ignoring exception ' + e
+                        }
+                    }
                 }
 
             }
