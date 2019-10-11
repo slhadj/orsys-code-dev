@@ -3,7 +3,8 @@ pipeline{
     stages{
         stage("Environment Set Up "){
             steps{
-                echo "========executing A========"
+                echo "========Installing Dependencies ========"
+                sh "npm install"
             }
             post{
                 always{
