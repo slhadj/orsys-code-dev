@@ -24,10 +24,10 @@ pipeline{
                 echo "========Specification testing========"
                 //bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
                 script {
-                    call(){
+                    
                     def lastSuccess = currentBuild.getProject().getLastSuccessfulBuild().getNumber() ;
                     echo lastSuccess;
-                    }
+                   
 
                 }
 
