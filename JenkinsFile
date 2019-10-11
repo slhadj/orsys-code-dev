@@ -20,7 +20,8 @@ pipeline{
         }
         stage("Specification testing"){
             steps{
-                echo "========executing A========"
+                echo "========Specification testing========"
+                bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
             }
             post{
                 always{
