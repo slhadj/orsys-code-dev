@@ -50,7 +50,7 @@ pipeline{
                 echo "========Application Building ========"
                 //bat "cd front-end && npm install && npx ng build && start cmd.exe /b npm start"
                 bat "cd front-end && npm install && npx ng build"
-                bat "RMDIR /S /Q C:/Uesrs/orsys/Desktop/server-html"
+                bat "RMDIR /S /Q C:/Users/orsys/Desktop/server-html"
                 bat "xcopy front-end/dist C:/Users/orsys/Desktop/server-html /E"
             }
             post{
