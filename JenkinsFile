@@ -1,5 +1,4 @@
 
-import jenkins.model.Jenkins
 pipeline{
     agent any
     stages{
@@ -25,33 +24,10 @@ pipeline{
                 echo "========Specification testing========"
                 //bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
                 script {
-                    println "ok"
-                   // def lastSuccess = currentBuild.getProject().getLastSuccessfulBuild().getNumber() ;
-                   // echo lastSuccess;
-                   
-                    /*This script shows how to get basic information about a job and its builds*/
+                    def LAST_BUILD = 12
+                    echo "ok";
+                  // bat "npx swagger-diff c:/12/artifact/API/swagger.yaml/ ./API/swagger.yaml"
 
-                    name = "test_master_builder_project"
-                    //If we want to add more then one job
-                    def items = new LinkedHashSet();
-                    def job = Hudson.instance.getJob(name)
-                    items.add(job);
-                    items.each { item ->
-                        try {
-                            def job_data = Jenkins.instance.getItemByFullName(item.fullName)
-                            println 'Job: ' + item.fullName
-                            if (job_data.getLastBuild()) {
-                                last_job_num = job_data.getLastBuild().getNumber()
-                                def upStreamBuild = Jenkins.getInstance().getItemByFullName(item.fullName).getBuildByNumber(last_job_num)
-                    println 'LastBuildNumer: ' + last_job_num
-                                println "LastBuildTime: ${upStreamBuild.getTime()}"
-                            } else {
-                                println 'LastBuildNumer: Null'
-                            }
-                        } catch (Exception e) {
-                            println ' Ignoring exception ' + e
-                        }
-                    }
                 }
 
             }
@@ -71,7 +47,8 @@ pipeline{
         }        
         stage("Application Building"){
             steps{
-                echo "========executing A========"
+                echo "========Application Building ========"
+                bat "cd front-end && npm install && npm serve"
             }
             post{
                 always{
@@ -87,7 +64,8 @@ pipeline{
         }
          stage("E2E"){
             steps{
-                echo "========executing A========"
+                echo "========E2E========"
+                bat "cd stories && npx  cypress run"
             }
             post{
                 always{
