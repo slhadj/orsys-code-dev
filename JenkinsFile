@@ -24,18 +24,20 @@ pipeline{
                 echo "========Specification testing========"
                 //bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
                 script {
-                    
+                    println "currentBuild.getProject() = ${currentBuild.getProject()}"
+                   // def lastSuccess = currentBuild.getProject().getLastSuccessfulBuild().getNumber() ;
+                   // echo lastSuccess;
+                   
                     /*This script shows how to get basic information about a job and its builds*/
-                    def jenkins = Jenkins.getInstance()
+          /*         def jenkins = Jenkins.getInstance()
                     //println "Last successfull build: ${jenkins}"
                     def jobName = "orsys code dev master"
                     def job = jenkins.getItem(jobName)
 
-                    println "Last successfull build: ${job.getLastSuccessfulBuild().getNumber()}"
-  /*                   println "Last failed build: ${job.getLastFailedBuild()}"
+                    println "Last successfull build: ${job.getLastSuccessfulBuild()}"
+                     println "Last failed build: ${job.getLastFailedBuild()}"
                     println "Last build: ${job.getLastBuild()}"
                     println "All builds: ${job.getBuilds().collect{ it.getNumber()}}" */
-
                 }
 
             }
