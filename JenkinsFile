@@ -1,6 +1,4 @@
-2
 
-use execute system groovy script
 pipeline{
     agent any
     stages{
@@ -25,8 +23,11 @@ pipeline{
             steps{
                 echo "========Specification testing========"
                 //bat "npx swagger-diff ./API/swagger.1.yaml ./API/swagger.yaml"
-                def lastSuccess = currentBuild.getProject().getLastSuccessfulBuild().getNumber() ;
-                echo lastSuccess
+                script{
+                    def lastSuccess = currentBuild.getProject().getLastSuccessfulBuild().getNumber() ;
+                    echo lastSuccess;
+                }
+
             }
             post{
                 always{
