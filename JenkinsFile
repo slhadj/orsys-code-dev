@@ -65,7 +65,7 @@ pipeline{
                 }
             }
         }       
-         stage("AReport"){
+         stage("Report"){
             steps{
                 echo "========executing A========"
             }
