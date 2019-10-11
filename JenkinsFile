@@ -49,7 +49,7 @@ pipeline{
             steps{
                 echo "========Application Building ========"
                 bat "cd front-end && npm install && npx ng build"
-                bat 'start cmd.exe /c npm start'
+                bat 'start cmd.exe /b npm start'
             }
             post{
                 always{
