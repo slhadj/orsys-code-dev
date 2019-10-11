@@ -48,7 +48,7 @@ pipeline{
         stage("Application Building"){
             steps{
                 echo "========Application Building ========"
-                bat "cd front-end && npm install && npm start"
+                bat "cd front-end && npm install && npx ng build"
             }
             post{
                 always{
