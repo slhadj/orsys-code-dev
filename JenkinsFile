@@ -1,3 +1,6 @@
+2
+
+use execute system groovy script
 pipeline{
     agent any
     stages{
