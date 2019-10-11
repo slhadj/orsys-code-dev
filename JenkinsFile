@@ -27,6 +27,7 @@ pipeline{
                     
                     /*This script shows how to get basic information about a job and its builds*/
                     def jenkins = Jenkins.getInstance()
+                    println "Last successfull build: ${jenkins}"
                     def jobName = "orsys code dev master"
                     def job = jenkins.getItem(jobName)
 
